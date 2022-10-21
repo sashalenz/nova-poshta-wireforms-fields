@@ -5,16 +5,19 @@ namespace Sashalenz\NovaPoshtaWireformsFields\FormFields;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Sashalenz\NovaPoshtaWireformsFields\Components\Fields\NovaPoshtaCity;
-use Sashalenz\NovaPoshtaWireformsFields\Components\Fields\NovaPoshtaWarehouse;
 use Sashalenz\Wireforms\Contracts\FieldContract;
 use Sashalenz\Wireforms\FormFields\FormField;
 
 class NovaPoshtaCityField extends FormField
 {
     protected bool $nullable = false;
+
     protected bool $searchable = false;
+
     protected ?array $emitTo = [];
+
     protected ?string $titleKey = null;
+
     protected ?string $titleValue = null;
 
     public function emitTo(string $emitTo): self
@@ -78,7 +81,7 @@ class NovaPoshtaCityField extends FormField
             key: $this->key,
             emitTo: array_filter($this->emitTo),
             titleKey: $this->wireModel
-                ? 'model.' . $this->titleKey
+                ? 'model.'.$this->titleKey
                 : $this->titleKey,
             titleValue: $this->titleValue
         );

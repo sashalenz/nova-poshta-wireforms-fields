@@ -11,9 +11,13 @@ use Sashalenz\Wireforms\FormFields\FormField;
 class NovaPoshtaWarehouseField extends FormField
 {
     protected bool $nullable = false;
+
     protected bool $searchable = false;
+
     protected ?string $cityRef = null;
+
     protected ?string $titleKey = null;
+
     protected ?string $titleValue = null;
 
     public function cityRef(?string $cityRef): self
@@ -82,7 +86,7 @@ class NovaPoshtaWarehouseField extends FormField
             key: $this->key,
             cityRef: $this->cityRef,
             titleKey: $this->wireModel
-                ? 'model.' . $this->titleKey
+                ? 'model.'.$this->titleKey
                 : $this->titleKey,
             titleValue: $this->titleValue
         );

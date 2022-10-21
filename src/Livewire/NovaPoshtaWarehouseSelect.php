@@ -12,14 +12,17 @@ use Sashalenz\Wireforms\Livewire\ModelSelect;
 final class NovaPoshtaWarehouseSelect extends ModelSelect
 {
     public ?string $titleKey = null;
+
     public ?string $titleValue = null;
+
     public string $cityRef;
+
     public bool $isPostomat = false;
 
     private const POSTOMAT_REF = 'f9316480-5f2d-425d-bc2c-ac7cd29decf0';
 
     protected $listeners = [
-        'updatedCityRef'
+        'updatedCityRef',
     ];
 
     public function mount(
