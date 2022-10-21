@@ -4,18 +4,15 @@ namespace Sashalenz\NovaPoshtaWireformsFields\Livewire;
 
 use Illuminate\Support\Collection;
 use Sashalenz\NovaPoshtaApi\ApiModels\Address;
-use Sashalenz\NovaPoshtaApi\DataTransferObjects\Address\WarehouseData;
+use Sashalenz\NovaPoshtaApi\DataTransferObjects\Address\StreetData;
 use Sashalenz\NovaPoshtaApi\Exceptions\NovaPoshtaException;
 
-final class NovaPoshtaWarehouseSelect extends NovaPoshtaBaseSelect
+final class NovaPoshtaStreetSelect extends NovaPoshtaBaseSelect
 {
     public string $cityRef;
-    public bool $isPostomat = false;
-
-    private const POSTOMAT_REF = 'f9316480-5f2d-425d-bc2c-ac7cd29decf0';
 
     protected $listeners = [
-        'updatedCityRef'
+        'updatedCityRef',
     ];
 
     public function mount(
@@ -30,8 +27,7 @@ final class NovaPoshtaWarehouseSelect extends NovaPoshtaBaseSelect
         ?string $titleKey = null,
         ?string $titleValue = null,
         ?array $emitTo = [],
-        ?string $cityRef = null,
-        bool $isPostomat = false
+        ?string $cityRef = null
     ): void {
         $this->name = $name;
         $this->placeholder = $placeholder;
@@ -45,7 +41,6 @@ final class NovaPoshtaWarehouseSelect extends NovaPoshtaBaseSelect
         $this->titleValue = $titleValue;
         $this->emitTo = $emitTo;
         $this->cityRef = $cityRef;
-        $this->isPostomat = $isPostomat;
     }
 
     public function updatedCityRef(string $value): void
@@ -57,7 +52,7 @@ final class NovaPoshtaWarehouseSelect extends NovaPoshtaBaseSelect
 
     public function getResultsProperty(): Collection
     {
-        if (! $this->isOpen) {
+        if (!$this->isOpen) {
             return collect();
         }
 
@@ -65,12 +60,11 @@ final class NovaPoshtaWarehouseSelect extends NovaPoshtaBaseSelect
             return $this->address
                 ->setCityRef($this->cityRef)
                 ->when(
-                    $this->isPostomat,
-                    fn (Address $address) => $address->setTypeOfWarehouseRef(self::POSTOMAT_REF)
+                    $this->searchable && $this->showResults(),
+                    fn (Address $address) => $address->setFindByString($this->search)
                 )
-                ->getWarehouses($this->search)
-                ->take($this->limit)
-                ->mapWithKeys(fn (WarehouseData $row) => [
+                ->getStreet()
+                ->mapWithKeys(fn (StreetData $row) => [
                     $row->ref => $row->description,
                 ]);
         } catch (NovaPoshtaException) {
