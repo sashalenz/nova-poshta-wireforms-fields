@@ -23,6 +23,7 @@
 				:city-ref="$cityRef"
 				:title-key="$titleKey"
 				:title-value="$titleValue"
+                :is-postomat="$isPostomat"
 		/>
 	</div>
 </x-wireforms::fields>

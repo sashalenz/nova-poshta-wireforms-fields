@@ -20,9 +20,10 @@ class NovaPoshtaWarehouse extends Field
         ?string $help = null,
         public bool $nullable = false,
         public bool $searchable = false,
+        public bool $isPostomat = false,
         public ?string $cityRef = null,
         public ?string $titleKey = null,
-        public ?string $titleValue = null
+        public ?string $titleValue = null,
     ) {
         parent::__construct(
             $name,
