@@ -18,8 +18,8 @@
     "require": {
         "php": "^8.1",
         "illuminate/contracts": "^9.0",
-        "sashalenz/nova-poshta-api": "^1.5",
-        "sashalenz/wireforms": "^0.2.12",
+        "sashalenz/nova-poshta-api": "@dev || ^1.5",
+        "sashalenz/wireforms": "@dev || ^0.2",
         "spatie/laravel-package-tools": "^1.13.0"
     },
     "require-dev": {
@@ -37,8 +37,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Sashalenz\\NovaPoshtaWireformsFields\\": "src",
-            "Sashalenz\\NovaPoshtaWireformsFields\\Database\\Factories\\": "database/factories"
+            "Sashalenz\\NovaPoshtaWireformsFields\\": "src"
         }
     },
     "autoload-dev": {
@@ -64,10 +63,7 @@
         "laravel": {
             "providers": [
                 "Sashalenz\\NovaPoshtaWireformsFields\\NovaPoshtaWireformsFieldsServiceProvider"
-            ],
-            "aliases": {
-                "NovaPoshtaWireformsFields": "Sashalenz\\NovaPoshtaWireformsFields\\Facades\\NovaPoshtaWireformsFields"
-            }
+            ]
         }
     },
     "minimum-stability": "dev",
