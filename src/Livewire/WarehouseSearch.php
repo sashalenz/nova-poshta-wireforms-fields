@@ -16,6 +16,7 @@ final class WarehouseSearch extends ModelSelect
     public ?string $titleValue = null;
 
     public string $cityRef;
+
     public bool $isPostomat = false;
 
     private const POSTOMAT_REF = 'f9316480-5f2d-425d-bc2c-ac7cd29decf0';

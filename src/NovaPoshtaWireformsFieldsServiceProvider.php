@@ -18,7 +18,7 @@ class NovaPoshtaWireformsFieldsServiceProvider extends PackageServiceProvider
     public function packageBooted(): void
     {
         $this->loadViewComponentsAs('wireforms', [
-            \Sashalenz\NovaPoshtaWireformsFields\Components\Fields\NovaPoshtaWarehouse::class
+            \Sashalenz\NovaPoshtaWireformsFields\Components\Fields\NovaPoshtaWarehouse::class,
         ]);
 
         Livewire::component(
