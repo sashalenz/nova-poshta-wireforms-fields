@@ -10,11 +10,12 @@ use Sashalenz\NovaPoshtaApi\Exceptions\NovaPoshtaException;
 final class NovaPoshtaCitySelect extends NovaPoshtaBaseSelect
 {
     public int $limit = 50;
+
     public ?int $minInputLength = 1;
 
-    public function getResultsProperty():? Collection
+    public function getResultsProperty(): ?Collection
     {
-        if (!$this->isOpen) {
+        if (! $this->isOpen) {
             return collect();
         }
 

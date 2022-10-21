@@ -9,7 +9,9 @@ use Sashalenz\Wireforms\Livewire\BaseSelect;
 abstract class NovaPoshtaBaseSelect extends BaseSelect
 {
     public ?string $titleKey = null;
+
     public ?string $titleValue = null;
+
     public array $emitTo = [];
 
     public function mount(
@@ -79,15 +81,15 @@ abstract class NovaPoshtaBaseSelect extends BaseSelect
 
     public function showResults(): bool
     {
-        return $this->searchable && (!is_int($this->minInputLength) || $this->minInputLength < Str::length($this->search));
+        return $this->searchable && (! is_int($this->minInputLength) || $this->minInputLength < Str::length($this->search));
     }
 
-    public function getSelectedValueProperty():? string
+    public function getSelectedValueProperty(): ?string
     {
         return $this->value;
     }
 
-    public function getSelectedTitleProperty():? string
+    public function getSelectedTitleProperty(): ?string
     {
         return $this->titleValue;
     }
@@ -99,6 +101,6 @@ abstract class NovaPoshtaBaseSelect extends BaseSelect
 
     public function isCurrent(string $key): bool
     {
-        return !is_null($this->selectedValue) && $key === $this->selectedValue;
+        return ! is_null($this->selectedValue) && $key === $this->selectedValue;
     }
 }
