@@ -4,26 +4,22 @@ namespace Sashalenz\NovaPoshtaWireformsFields\FormFields;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Sashalenz\NovaPoshtaWireformsFields\Components\Fields\NovaPoshtaCity;
 use Sashalenz\NovaPoshtaWireformsFields\Components\Fields\NovaPoshtaWarehouse;
 use Sashalenz\Wireforms\Contracts\FieldContract;
 use Sashalenz\Wireforms\FormFields\FormField;
 
-class NovaPoshtaWarehouseField extends FormField
+class NovaPoshtaCityField extends FormField
 {
     protected bool $nullable = false;
     protected bool $searchable = false;
-    protected ?string $cityRef = null;
+    protected ?array $emitTo = [];
     protected ?string $titleKey = null;
     protected ?string $titleValue = null;
 
-    public function cityRef(?string $cityRef): self
+    public function emitTo(string $emitTo): self
     {
-        if (is_null($cityRef)) {
-            $this->disabled = true;
-            $this->cityRef = 'null';
-        } else {
-            $this->cityRef = $cityRef;
-        }
+        $this->emitTo[] = $emitTo;
 
         return $this;
     }
@@ -69,7 +65,7 @@ class NovaPoshtaWarehouseField extends FormField
 
     protected function render(): FieldContract
     {
-        return NovaPoshtaWarehouse::make(
+        return NovaPoshtaCity::make(
             name: $this->getNameOrWireModel(),
             value: $this->value,
             nullable: $this->nullable,
@@ -80,7 +76,7 @@ class NovaPoshtaWarehouseField extends FormField
             required: $this->required,
             readonly: $this->disabled,
             key: $this->key,
-            cityRef: $this->cityRef,
+            emitTo: array_filter($this->emitTo),
             titleKey: $this->wireModel
                 ? 'model.' . $this->titleKey
                 : $this->titleKey,

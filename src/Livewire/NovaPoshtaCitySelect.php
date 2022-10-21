@@ -5,21 +5,17 @@ namespace Sashalenz\NovaPoshtaWireformsFields\Livewire;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Sashalenz\NovaPoshtaApi\ApiModels\Address;
-use Sashalenz\NovaPoshtaApi\DataTransferObjects\Address\WarehouseData;
+use Sashalenz\NovaPoshtaApi\DataTransferObjects\Address\CityData;
 use Sashalenz\NovaPoshtaApi\Exceptions\NovaPoshtaException;
 use Sashalenz\Wireforms\Livewire\ModelSelect;
 
-final class WarehouseSearch extends ModelSelect
+final class NovaPoshtaCitySelect extends ModelSelect
 {
     public ?string $titleKey = null;
-
     public ?string $titleValue = null;
-
-    public string $cityRef;
-
-    public bool $isPostomat = false;
-
-    private const POSTOMAT_REF = 'f9316480-5f2d-425d-bc2c-ac7cd29decf0';
+    public int $limit = 50;
+    public ?int $minInputLength = 1;
+    public array $emitTo = [];
 
     public function mount(
         string $name,
@@ -33,10 +29,9 @@ final class WarehouseSearch extends ModelSelect
         ?string $orderBy = null,
         ?string $orderDir = null,
         bool $searchable = true,
-        ?string $cityRef = null,
         ?string $titleKey = null,
         ?string $titleValue = null,
-        bool $isPostomat = false
+        ?array $emitTo = []
     ): void {
         $this->name = $name;
         $this->model = $model;
@@ -49,15 +44,16 @@ final class WarehouseSearch extends ModelSelect
         $this->orderBy = $orderBy;
         $this->orderDir = $orderDir;
         $this->searchable = $searchable;
-        $this->cityRef = $cityRef;
         $this->titleKey = $titleKey;
         $this->titleValue = $titleValue;
-        $this->isPostomat = $isPostomat;
+        $this->emitTo = $emitTo;
     }
 
     public function setSelected($value): void
     {
         if ($this->value === $value) {
+            $this->isOpen = false;
+
             return;
         }
 
@@ -71,21 +67,25 @@ final class WarehouseSearch extends ModelSelect
             $this->emitUp('updatedChild', $this->titleKey, $result);
         }
 
-        $this->search = '';
+        foreach ($this->emitTo as $emitTo) {
+            $this->emitTo($emitTo, 'updatedCityRef', $this->value);
+        }
+
         $this->isOpen = false;
+        $this->search = '';
     }
 
     public function showResults(): bool
     {
-        return $this->searchable && (! is_int($this->minInputLength) || $this->minInputLength < Str::length($this->search));
+        return $this->searchable && ($this->minInputLength < Str::length($this->search));
     }
 
-    public function getSelectedValueProperty(): ?string
+    public function getSelectedValueProperty():? string
     {
         return $this->value;
     }
 
-    public function getSelectedTitleProperty(): ?string
+    public function getSelectedTitleProperty():? string
     {
         return $this->titleValue;
     }
@@ -95,22 +95,18 @@ final class WarehouseSearch extends ModelSelect
         return $address;
     }
 
-    public function getResultsProperty(): Collection
+    public function getResultsProperty():? Collection
     {
-        if (! $this->isOpen) {
+        if (!$this->isOpen) {
             return collect();
         }
 
         try {
             return $this->address
-                ->setCityRef($this->cityRef)
-                ->when(
-                    $this->isPostomat,
-                    fn (Address $address) => $address->setTypeOfWarehouseRef(self::POSTOMAT_REF)
-                )
-                ->getWarehouses($this->search)
-                ->take($this->limit)
-                ->mapWithKeys(fn (WarehouseData $row) => [
+                ->setLimit($this->limit)
+                ->when($this->search, fn (Address $req) => $req->setFindByString($this->search))
+                ->getCities()
+                ->mapWithKeys(fn (CityData $row) => [
                     $row->ref => $row->description,
                 ]);
         } catch (NovaPoshtaException) {
@@ -120,6 +116,6 @@ final class WarehouseSearch extends ModelSelect
 
     public function isCurrent(string $key): bool
     {
-        return ! is_null($this->selectedValue) && $key === $this->selectedValue;
+        return !is_null($this->selectedValue) && $key === $this->selectedValue;
     }
 }

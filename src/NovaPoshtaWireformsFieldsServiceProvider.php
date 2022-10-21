@@ -22,8 +22,13 @@ class NovaPoshtaWireformsFieldsServiceProvider extends PackageServiceProvider
         ]);
 
         Livewire::component(
-            'nova-poshta-wireforms-fields.livewire.warehouse-search',
-            \Sashalenz\NovaPoshtaWireformsFields\Livewire\WarehouseSearch::class
+            'nova-poshta-wireforms-fields.livewire.nova-poshta-warehouse-select',
+            \Sashalenz\NovaPoshtaWireformsFields\Livewire\NovaPoshtaWarehouseSelect::class
+        );
+
+        Livewire::component(
+            'nova-poshta-wireforms-fields.livewire.nova-poshta-city-select',
+            \Sashalenz\NovaPoshtaWireformsFields\Livewire\NovaPoshtaCitySelect::class
         );
     }
 }

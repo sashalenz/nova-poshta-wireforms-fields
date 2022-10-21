@@ -5,7 +5,7 @@ namespace Sashalenz\NovaPoshtaWireformsFields\Components\Fields;
 use Illuminate\Contracts\View\View;
 use Sashalenz\Wireforms\Components\Fields\Field;
 
-class NovaPoshtaWarehouse extends Field
+class NovaPoshtaCity extends Field
 {
     public function __construct(
         string $name,
@@ -20,7 +20,7 @@ class NovaPoshtaWarehouse extends Field
         ?string $help = null,
         public bool $nullable = false,
         public bool $searchable = false,
-        public ?string $cityRef = null,
+        public ?array $emitTo = [],
         public ?string $titleKey = null,
         public ?string $titleValue = null
     ) {
@@ -40,7 +40,7 @@ class NovaPoshtaWarehouse extends Field
 
     public function render(): View
     {
-        return view('nova-poshta-wireforms-fields::fields.nova-poshta-warehouse')
+        return view('nova-poshta-wireforms-fields::fields.nova-poshta-city')
             ->with($this->data());
     }
 }

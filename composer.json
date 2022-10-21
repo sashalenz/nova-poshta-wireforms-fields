@@ -4,7 +4,8 @@
     "keywords": [
         "sashalenz",
         "laravel",
-        "nova-poshta-wireforms-fields"
+        "nova-poshta-wireforms-fields",
+        "wireforms"
     ],
     "homepage": "https://github.com/sashalenz/nova-poshta-wireforms-fields",
     "license": "MIT",
@@ -35,6 +36,15 @@
         "phpstan/phpstan-phpunit": "^1.0",
         "phpunit/phpunit": "^9.5"
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../*",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
     "autoload": {
         "psr-4": {
             "Sashalenz\\NovaPoshtaWireformsFields\\": "src"

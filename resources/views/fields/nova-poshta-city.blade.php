@@ -11,7 +11,7 @@
 	<div class="flex items-center"
 			{{ $attributes->whereStartsWith(['x-']) }}
 	>
-        <livewire:nova-poshta-wireforms-fields.livewire.nova-poshta-warehouse-select
+		<livewire:nova-poshta-wireforms-fields.livewire.nova-poshta-city-select
 				:name="$id"
 				:required="$required"
 				:placeholder="$placeholder"
