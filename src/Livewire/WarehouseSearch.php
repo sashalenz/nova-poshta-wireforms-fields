@@ -14,7 +14,6 @@ final class WarehouseSearch extends ModelSelect
     public ?string $titleKey = null;
     public ?string $titleValue = null;
     public string $cityRef;
-
     public bool $isPostomat = false;
 
     private const POSTOMAT_REF = 'f9316480-5f2d-425d-bc2c-ac7cd29decf0';
@@ -37,19 +36,19 @@ final class WarehouseSearch extends ModelSelect
         bool $isPostomat = false
     ): void {
         $this->name = $name;
-        $this->required = $required;
-        $this->placeholder = $placeholder;
-        $this->value = $value;
         $this->model = $model;
+        $this->placeholder = $placeholder;
         $this->createNewModel = $createNewModel;
         $this->createNewField = $createNewField;
+        $this->value = $value;
+        $this->required = $required;
         $this->readonly = $readonly;
         $this->orderBy = $orderBy;
         $this->orderDir = $orderDir;
         $this->searchable = $searchable;
+        $this->cityRef = $cityRef;
         $this->titleKey = $titleKey;
         $this->titleValue = $titleValue;
-        $this->cityRef = $cityRef;
         $this->isPostomat = $isPostomat;
     }
 
