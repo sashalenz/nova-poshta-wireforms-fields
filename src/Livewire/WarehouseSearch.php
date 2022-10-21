@@ -12,7 +12,9 @@ use Sashalenz\Wireforms\Livewire\ModelSelect;
 final class WarehouseSearch extends ModelSelect
 {
     public ?string $titleKey = null;
+
     public ?string $titleValue = null;
+
     public string $cityRef;
 
     public bool $isPostomat = false;
@@ -75,15 +77,15 @@ final class WarehouseSearch extends ModelSelect
 
     public function showResults(): bool
     {
-        return $this->searchable && (!is_int($this->minInputLength) || $this->minInputLength < Str::length($this->search));
+        return $this->searchable && (! is_int($this->minInputLength) || $this->minInputLength < Str::length($this->search));
     }
 
-    public function getSelectedValueProperty():? string
+    public function getSelectedValueProperty(): ?string
     {
         return $this->value;
     }
 
-    public function getSelectedTitleProperty():? string
+    public function getSelectedTitleProperty(): ?string
     {
         return $this->titleValue;
     }
@@ -95,7 +97,7 @@ final class WarehouseSearch extends ModelSelect
 
     public function getResultsProperty(): Collection
     {
-        if (!$this->isOpen) {
+        if (! $this->isOpen) {
             return collect();
         }
 
@@ -118,6 +120,6 @@ final class WarehouseSearch extends ModelSelect
 
     public function isCurrent(string $key): bool
     {
-        return !is_null($this->selectedValue) && $key === $this->selectedValue;
+        return ! is_null($this->selectedValue) && $key === $this->selectedValue;
     }
 }

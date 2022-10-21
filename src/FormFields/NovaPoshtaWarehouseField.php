@@ -11,9 +11,13 @@ use Sashalenz\Wireforms\FormFields\FormField;
 class NovaPoshtaWarehouseField extends FormField
 {
     protected bool $nullable = false;
+
     protected bool $searchable = false;
+
     protected ?string $cityRef = null;
+
     protected ?string $titleKey = null;
+
     protected ?string $titleValue = null;
 
     public function cityRef(?string $cityRef): self
