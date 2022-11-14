@@ -54,7 +54,7 @@ final class NovaPoshtaStreetSelect extends NovaPoshtaBaseSelect
 
     public function getResultsProperty(): Collection
     {
-        if (!$this->isOpen) {
+        if (! $this->isOpen) {
             return collect();
         }
 
