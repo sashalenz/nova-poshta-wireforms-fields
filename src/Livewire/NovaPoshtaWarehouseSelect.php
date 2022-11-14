@@ -26,6 +26,7 @@ final class NovaPoshtaWarehouseSelect extends NovaPoshtaBaseSelect
         bool $readonly = false,
         ?string $orderBy = null,
         ?string $orderDir = null,
+        ?int $minInputLength = null,
         bool $searchable = true,
         ?string $titleKey = null,
         ?string $titleValue = null,
@@ -41,6 +42,7 @@ final class NovaPoshtaWarehouseSelect extends NovaPoshtaBaseSelect
         $this->orderBy = $orderBy;
         $this->orderDir = $orderDir;
         $this->searchable = $searchable;
+        $this->minInputLength = $minInputLength;
         $this->titleKey = $titleKey;
         $this->titleValue = $titleValue;
         $this->emitTo = $emitTo;

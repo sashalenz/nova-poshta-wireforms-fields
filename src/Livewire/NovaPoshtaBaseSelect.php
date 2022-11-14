@@ -20,6 +20,7 @@ abstract class NovaPoshtaBaseSelect extends BaseSelect
         bool $readonly = false,
         ?string $orderBy = null,
         ?string $orderDir = null,
+        ?int $minInputLength = null,
         bool $searchable = true,
         ?string $titleKey = null,
         ?string $titleValue = null,
@@ -32,6 +33,7 @@ abstract class NovaPoshtaBaseSelect extends BaseSelect
         $this->readonly = $readonly;
         $this->orderBy = $orderBy;
         $this->orderDir = $orderDir;
+        $this->minInputLength = $minInputLength;
         $this->searchable = $searchable;
         $this->titleKey = $titleKey;
         $this->titleValue = $titleValue;
