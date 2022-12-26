@@ -10,7 +10,9 @@ use Sashalenz\NovaPoshtaApi\Exceptions\NovaPoshtaException;
 final class NovaPoshtaWarehouseSelect extends NovaPoshtaBaseSelect
 {
     public string $cityRef;
+
     public bool $isPostomat = false;
+
     private const POSTOMAT_REF = 'f9316480-5f2d-425d-bc2c-ac7cd29decf0';
 
     protected $listeners = [
