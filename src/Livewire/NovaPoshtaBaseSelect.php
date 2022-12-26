@@ -9,9 +9,7 @@ use Sashalenz\Wireforms\Livewire\BaseSelect;
 abstract class NovaPoshtaBaseSelect extends BaseSelect
 {
     public ?string $titleKey = null;
-
     public ?string $titleValue = null;
-
     public array $emitTo = [];
 
     public function mount(
@@ -20,23 +18,21 @@ abstract class NovaPoshtaBaseSelect extends BaseSelect
         string $value = null,
         bool $required = false,
         bool $readonly = false,
-        ?string $orderBy = null,
-        ?string $orderDir = null,
         ?int $minInputLength = null,
         bool $searchable = true,
+        ?string $viewName = null,
         ?string $titleKey = null,
         ?string $titleValue = null,
         ?array $emitTo = []
     ): void {
         $this->name = $name;
+        $this->required = $required;
         $this->placeholder = $placeholder;
         $this->value = $value;
-        $this->required = $required;
         $this->readonly = $readonly;
-        $this->orderBy = $orderBy;
-        $this->orderDir = $orderDir;
         $this->minInputLength = $minInputLength;
         $this->searchable = $searchable;
+        $this->viewName = $viewName;
         $this->titleKey = $titleKey;
         $this->titleValue = $titleValue;
         $this->emitTo = $emitTo;

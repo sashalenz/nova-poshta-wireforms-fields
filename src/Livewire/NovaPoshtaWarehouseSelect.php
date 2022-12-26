@@ -10,9 +10,7 @@ use Sashalenz\NovaPoshtaApi\Exceptions\NovaPoshtaException;
 final class NovaPoshtaWarehouseSelect extends NovaPoshtaBaseSelect
 {
     public string $cityRef;
-
     public bool $isPostomat = false;
-
     private const POSTOMAT_REF = 'f9316480-5f2d-425d-bc2c-ac7cd29decf0';
 
     protected $listeners = [
@@ -25,10 +23,9 @@ final class NovaPoshtaWarehouseSelect extends NovaPoshtaBaseSelect
         string $value = null,
         bool $required = false,
         bool $readonly = false,
-        ?string $orderBy = null,
-        ?string $orderDir = null,
         ?int $minInputLength = null,
         bool $searchable = true,
+        ?string $viewName = null,
         ?string $titleKey = null,
         ?string $titleValue = null,
         ?array $emitTo = [],
@@ -36,14 +33,13 @@ final class NovaPoshtaWarehouseSelect extends NovaPoshtaBaseSelect
         bool $isPostomat = false
     ): void {
         $this->name = $name;
+        $this->required = $required;
         $this->placeholder = $placeholder;
         $this->value = $value;
-        $this->required = $required;
         $this->readonly = $readonly;
-        $this->orderBy = $orderBy;
-        $this->orderDir = $orderDir;
-        $this->searchable = $searchable;
         $this->minInputLength = $minInputLength;
+        $this->searchable = $searchable;
+        $this->viewName = $viewName;
         $this->titleKey = $titleKey;
         $this->titleValue = $titleValue;
         $this->emitTo = $emitTo;
