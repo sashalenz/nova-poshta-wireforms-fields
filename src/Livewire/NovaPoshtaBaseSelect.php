@@ -9,7 +9,9 @@ use Sashalenz\Wireforms\Livewire\BaseSelect;
 abstract class NovaPoshtaBaseSelect extends BaseSelect
 {
     public ?string $titleKey = null;
+
     public ?string $titleValue = null;
+
     public array $emitTo = [];
 
     public function mount(
