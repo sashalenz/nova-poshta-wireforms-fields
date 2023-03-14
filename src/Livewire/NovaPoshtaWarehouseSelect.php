@@ -4,7 +4,6 @@ namespace Sashalenz\NovaPoshtaWireformsFields\Livewire;
 
 use Illuminate\Support\Collection;
 use Sashalenz\NovaPoshtaApi\ApiModels\Address;
-use Sashalenz\NovaPoshtaApi\DataTransferObjects\Address\WarehouseData;
 use Sashalenz\NovaPoshtaApi\Exceptions\NovaPoshtaException;
 
 final class NovaPoshtaWarehouseSelect extends NovaPoshtaBaseSelect
@@ -65,15 +64,19 @@ final class NovaPoshtaWarehouseSelect extends NovaPoshtaBaseSelect
         }
 
         try {
-            return $this->address
-                ->setCityRef($this->cityRef)
-                ->when(
-                    $this->isPostomat,
-                    fn (Address $address) => $address->setTypeOfWarehouseRef(self::POSTOMAT_REF)
+            return Address\Address::make()
+                ->getWarehouses(
+                    Address\RequestData\GetWarehousesRequest::from(
+                        array_filter([
+                            'limit' => $this->limit,
+                            'cityRef' => $this->cityRef,
+                            'findByString' => $this->search,
+                            'typeOfWarehouseRef' => $this->isPostomat ? self::POSTOMAT_REF : null
+                        ])
+                    )
                 )
-                ->getWarehouses($this->search)
-                ->take($this->limit)
-                ->mapWithKeys(fn (WarehouseData $row) => [
+                ->toCollection()
+                ->mapWithKeys(fn (Address\ResponseData\WarehouseData $row) => [
                     $row->ref => $row->description,
                 ]);
         } catch (NovaPoshtaException) {

@@ -2,9 +2,8 @@
 
 namespace Sashalenz\NovaPoshtaWireformsFields\Livewire;
 
-use Illuminate\Support\Collection;
 use Sashalenz\NovaPoshtaApi\ApiModels\Address;
-use Sashalenz\NovaPoshtaApi\DataTransferObjects\Address\StreetData;
+use Illuminate\Support\Collection;
 use Sashalenz\NovaPoshtaApi\Exceptions\NovaPoshtaException;
 
 final class NovaPoshtaStreetSelect extends NovaPoshtaBaseSelect
@@ -59,14 +58,15 @@ final class NovaPoshtaStreetSelect extends NovaPoshtaBaseSelect
         }
 
         try {
-            return $this->address
-                ->setCityRef($this->cityRef)
-                ->when(
-                    $this->searchable && $this->showResults(),
-                    fn (Address $address) => $address->setFindByString($this->search)
+            return Address\Address::make()
+                ->getStreet(
+                    Address\RequestData\GetStreetRequest::from([
+                        'cityRef' => $this->cityRef,
+                        'findByString' => $this->searchable ? $this->search : ''
+                    ])
                 )
-                ->getStreet()
-                ->mapWithKeys(fn (StreetData $row) => [
+                ->toCollection()
+                ->mapWithKeys(fn (Address\ResponseData\StreetData $row) => [
                     $row->ref => $row->description,
                 ]);
         } catch (NovaPoshtaException) {

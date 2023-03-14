@@ -3,7 +3,6 @@
 namespace Sashalenz\NovaPoshtaWireformsFields\Livewire;
 
 use Illuminate\Support\Str;
-use Sashalenz\NovaPoshtaApi\ApiModels\Address;
 use Xite\Wireforms\Livewire\BaseSelect;
 
 abstract class NovaPoshtaBaseSelect extends BaseSelect
@@ -94,11 +93,6 @@ abstract class NovaPoshtaBaseSelect extends BaseSelect
     public function getSelectedTitleProperty(): ?string
     {
         return $this->titleValue;
-    }
-
-    public function getAddressProperty(Address $address): Address
-    {
-        return $address;
     }
 
     public function isCurrent(string $key): bool

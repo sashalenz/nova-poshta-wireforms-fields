@@ -19,7 +19,7 @@
     "require": {
         "php": "^8.1|^8.2",
         "illuminate/contracts": "^9.0|^10.0",
-        "sashalenz/nova-poshta-api": "@dev || ^1.6",
+        "sashalenz/nova-poshta-api": "@dev || ^2.0",
         "spatie/laravel-package-tools": "^1.14",
         "xitedev/wireforms": "@dev || ^1.0"
     },
