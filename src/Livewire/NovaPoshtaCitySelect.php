@@ -26,7 +26,7 @@ final class NovaPoshtaCitySelect extends NovaPoshtaBaseSelect
                 )
                 ->toCollection()
                 ->mapWithKeys(fn (Address\ResponseData\CityData $row) => [
-                    $row->ref => $row->description,
+                    $row->ref => $row->settlementTypeDescription." ".$row->description,
                 ]);
         } catch (NovaPoshtaException) {
             return collect();

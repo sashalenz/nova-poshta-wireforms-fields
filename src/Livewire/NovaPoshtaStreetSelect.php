@@ -9,6 +9,7 @@ use Sashalenz\NovaPoshtaApi\Exceptions\NovaPoshtaException;
 final class NovaPoshtaStreetSelect extends NovaPoshtaBaseSelect
 {
     public string $cityRef;
+    public ?int $minInputLength = 1;
 
     protected $listeners = [
         'updatedCityRef',
@@ -37,11 +38,13 @@ final class NovaPoshtaStreetSelect extends NovaPoshtaBaseSelect
         $this->minInputLength = $minInputLength;
         $this->limit = $limit;
         $this->searchable = $searchable;
-        $this->viewName = $viewName;
         $this->titleKey = $titleKey;
         $this->titleValue = $titleValue;
         $this->emitTo = $emitTo;
         $this->cityRef = $cityRef;
+        if ($viewName) {
+            $this->viewName = $viewName;
+        }
     }
 
     public function updatedCityRef(string $value): void
@@ -67,7 +70,7 @@ final class NovaPoshtaStreetSelect extends NovaPoshtaBaseSelect
                 )
                 ->toCollection()
                 ->mapWithKeys(fn (Address\ResponseData\StreetData $row) => [
-                    $row->ref => $row->description,
+                    $row->ref => $row->streetsType." ".$row->description,
                 ]);
         } catch (NovaPoshtaException) {
             return collect();

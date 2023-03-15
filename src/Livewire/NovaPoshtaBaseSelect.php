@@ -35,10 +35,13 @@ abstract class NovaPoshtaBaseSelect extends BaseSelect
         $this->minInputLength = $minInputLength;
         $this->limit = $limit;
         $this->searchable = $searchable;
-        $this->viewName = $viewName;
         $this->titleKey = $titleKey;
         $this->titleValue = $titleValue;
         $this->emitTo = $emitTo;
+
+        if ($viewName) {
+            $this->viewName = $viewName;
+        }
     }
 
     public function setSelected($value): void
@@ -78,11 +81,6 @@ abstract class NovaPoshtaBaseSelect extends BaseSelect
 
         $this->search = '';
         $this->isOpen = false;
-    }
-
-    public function showResults(): bool
-    {
-        return $this->searchable && (! is_int($this->minInputLength) || $this->minInputLength < Str::length($this->search));
     }
 
     public function getSelectedValueProperty(): ?string

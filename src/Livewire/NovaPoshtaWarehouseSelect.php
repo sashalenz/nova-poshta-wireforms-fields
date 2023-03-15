@@ -42,12 +42,15 @@ final class NovaPoshtaWarehouseSelect extends NovaPoshtaBaseSelect
         $this->minInputLength = $minInputLength;
         $this->limit = $limit;
         $this->searchable = $searchable;
-        $this->viewName = $viewName;
         $this->titleKey = $titleKey;
         $this->titleValue = $titleValue;
         $this->emitTo = $emitTo;
         $this->cityRef = $cityRef;
         $this->isPostomat = $isPostomat;
+
+        if ($viewName) {
+            $this->viewName = $viewName;
+        }
     }
 
     public function updatedCityRef(string $value): void
