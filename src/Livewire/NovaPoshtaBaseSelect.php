@@ -54,29 +54,28 @@ abstract class NovaPoshtaBaseSelect extends BaseSelect
 
         $this->value = $value;
 
-        $this->emitUp(
-            $this->emitUp,
-            $this->name,
-            $this->value
+        $this->dispatch(
+            event: $this->emitUp,
+            key: $this->name,
+            value: $this->value
         );
 
         if ($this->titleKey) {
             $result = $this->results->get($value);
             $this->titleValue = $result;
 
-            $this->emitUp(
-                $this->emitUp,
-                $this->titleKey,
-                $result
+            $this->dispatch(
+                event: $this->emitUp,
+                key: $this->titleKey,
+                value: $result
             );
         }
 
         foreach ($this->emitTo as $emitTo) {
-            $this->emitTo(
-                $emitTo,
-                Str::of($this->name)->prepend('updated')->camel()->toString(),
-                $this->value
-            );
+            $this->dispatch(
+                event: Str::of($this->name)->prepend('updated')->camel()->toString(),
+                value: $this->value
+            )->to($emitTo);
         }
 
         $this->search = '';

@@ -3,6 +3,7 @@
 namespace Sashalenz\NovaPoshtaWireformsFields\Livewire;
 
 use Illuminate\Support\Collection;
+use Livewire\Attributes\On;
 use Sashalenz\NovaPoshtaApi\ApiModels\Address;
 use Sashalenz\NovaPoshtaApi\Exceptions\NovaPoshtaException;
 
@@ -13,10 +14,6 @@ final class NovaPoshtaWarehouseSelect extends NovaPoshtaBaseSelect
     public bool $isPostomat = false;
 
     private const POSTOMAT_REF = 'f9316480-5f2d-425d-bc2c-ac7cd29decf0';
-
-    protected $listeners = [
-        'updatedCityRef',
-    ];
 
     public function mount(
         string $name,
@@ -53,6 +50,7 @@ final class NovaPoshtaWarehouseSelect extends NovaPoshtaBaseSelect
         }
     }
 
+    #[On('updatedCityRef')]
     public function updatedCityRef(string $value): void
     {
         $this->cityRef = $value;

@@ -2,6 +2,7 @@
 
 namespace Sashalenz\NovaPoshtaWireformsFields\Livewire;
 
+use Livewire\Attributes\On;
 use Sashalenz\NovaPoshtaApi\ApiModels\Address;
 use Illuminate\Support\Collection;
 use Sashalenz\NovaPoshtaApi\Exceptions\NovaPoshtaException;
@@ -10,10 +11,6 @@ final class NovaPoshtaStreetSelect extends NovaPoshtaBaseSelect
 {
     public string $cityRef;
     public ?int $minInputLength = 1;
-
-    protected $listeners = [
-        'updatedCityRef',
-    ];
 
     public function mount(
         string $name,
@@ -47,6 +44,7 @@ final class NovaPoshtaStreetSelect extends NovaPoshtaBaseSelect
         }
     }
 
+    #[On('updatedCityRef')]
     public function updatedCityRef(string $value): void
     {
         $this->cityRef = $value;
