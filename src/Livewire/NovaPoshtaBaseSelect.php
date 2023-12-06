@@ -60,8 +60,10 @@ abstract class NovaPoshtaBaseSelect extends BaseSelect
             value: $this->value
         );
 
-        if ($this->titleKey) {
-            $result = $this->results->get($value);
+        if ($this->titleKey && $result = $this->getResults->get($value)) {
+            ray($this->getResults);
+            ray($result);
+
             $this->titleValue = $result;
 
             $this->dispatch(
@@ -71,6 +73,7 @@ abstract class NovaPoshtaBaseSelect extends BaseSelect
             );
         }
 
+        ray($this->emitTo);
         foreach ($this->emitTo as $emitTo) {
             $this->dispatch(
                 event: Str::of($this->name)->prepend('updated')->camel()->toString(),

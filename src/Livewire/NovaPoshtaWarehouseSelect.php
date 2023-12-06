@@ -3,6 +3,7 @@
 namespace Sashalenz\NovaPoshtaWireformsFields\Livewire;
 
 use Illuminate\Support\Collection;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
 use Sashalenz\NovaPoshtaApi\ApiModels\Address;
 use Sashalenz\NovaPoshtaApi\Exceptions\NovaPoshtaException;
@@ -58,12 +59,9 @@ final class NovaPoshtaWarehouseSelect extends NovaPoshtaBaseSelect
         $this->readonly = is_null($value);
     }
 
-    public function getResultsProperty(): Collection
+    #[Computed]
+    public function getResults(): Collection
     {
-        if (! $this->isOpen) {
-            return collect();
-        }
-
         try {
             return Address\Address::make()
                 ->getWarehouses(

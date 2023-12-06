@@ -3,6 +3,7 @@
 namespace Sashalenz\NovaPoshtaWireformsFields\Livewire;
 
 use Illuminate\Support\Collection;
+use Livewire\Attributes\Computed;
 use Sashalenz\NovaPoshtaApi\ApiModels\Address;
 use Sashalenz\NovaPoshtaApi\Exceptions\NovaPoshtaException;
 
@@ -10,12 +11,9 @@ final class NovaPoshtaCitySelect extends NovaPoshtaBaseSelect
 {
     public ?int $minInputLength = 1;
 
-    public function getResultsProperty(): ?Collection
+    #[Computed]
+    public function getResults(): ?Collection
     {
-        if (! $this->isOpen) {
-            return collect();
-        }
-
         try {
             return Address\Address::make()
                 ->getCities(
