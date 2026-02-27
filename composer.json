@@ -23,12 +23,6 @@
         "spatie/laravel-package-tools": "^1.93",
         "xitedev/wireforms": "^2.1"
     },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://repo.xitedev.com"
-        }
-    ],
     "require-dev": {
         "roave/security-advisories": "dev-latest",
         "laravel/pint": "^1.27",
